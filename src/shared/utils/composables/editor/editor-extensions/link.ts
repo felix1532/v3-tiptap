@@ -28,8 +28,6 @@ export const LinkExtension = Node.create<LinkOptions>({
   group: 'inline',
   inline: true,
   content: 'text*',
-  selectable: true,
-  draggable: false,
 
   addOptions() {
     return {
@@ -41,71 +39,22 @@ export const LinkExtension = Node.create<LinkOptions>({
     return {
       href: {
         default: null,
-        // parseHTML: (element) => element.getAttribute('href'),
-        // renderHTML: (attributes) => {
-        //   if (!attributes.href) {
-        //     return {}
-        //   }
-        //   return { href: attributes.href }
-        // },
       },
       target: {
         default: '_blank',
-        // parseHTML: (element) => element.getAttribute('target') || '_blank',
-        // renderHTML: (attributes) => {
-        //   if (!attributes.target) {
-        //     return {}
-        //   }
-        //   return { target: attributes.target }
-        // },
       },
       title: {
         default: null,
-        // parseHTML: (element) => element.getAttribute('title'),
-        // renderHTML: (attributes) => {
-        //   if (!attributes.title) {
-        //     return {}
-        //   }
-        //   return { title: attributes.title }
-        // },
       },
       rel: {
         default: 'noopener noreferrer nofollow',
-        // parseHTML: (element) => element.getAttribute('rel'),
-        // renderHTML: (attributes) => {
-        //   if (!attributes.rel) {
-        //     return { rel: 'noopener noreferrer nofollow' }
-        //   }
-        //   return { rel: attributes.rel }
-        // },
       },
-      // 'data-link': {
-      //   default: this.name,
-      // },
     }
   },
 
-  // parseHTML() {
-  //   return [
-  //     {
-  //       tag: `a[data-link="${this.name}"]`,
-  //       getAttrs: (dom) => {
-  //         if (typeof dom === 'string') return {}
-  //         return {
-  //           href: dom.getAttribute('href'),
-  //           target: dom.getAttribute('target'),
-  //           title: dom.getAttribute('title'),
-  //           rel: dom.getAttribute('rel'),
-  //           'data-link': dom.getAttribute('data-link'),
-  //         }
-  //       },
-  //     },
-  //   ]
-  // },
-  //
-  // renderHTML({ HTMLAttributes }) {
-  //   return ['a', { ...this.options.HTMLAttributes, ...HTMLAttributes }, 0]
-  // },
+  renderHTML() {
+    return ['p']
+  },
 
   addCommands() {
     return {
@@ -122,7 +71,6 @@ export const LinkExtension = Node.create<LinkOptions>({
                 type: this.name,
                 attrs: {
                   href: attributes.href,
-                  title: attributes.title || text,
                   target: attributes.target || '_blank',
                   rel: 'noopener noreferrer nofollow',
                 },

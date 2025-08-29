@@ -1,20 +1,31 @@
 <template>
   <NodeViewWrapper class="wrapper">
     <Tooltip :content="nodeAttrs.href">
-      <a :href="nodeAttrs.href" :rel="nodeAttrs.rel" :target="nodeAttrs.target">{{ title }}</a>
+      <a :href="nodeAttrs.href" :rel="nodeAttrs.rel" :target="nodeAttrs.target" @click="onClick">
+        <NodeViewContent />
+      </a>
     </Tooltip>
   </NodeViewWrapper>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { type NodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
+import { NodeViewContent, type NodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
 import { Tooltip } from '@/shared/components'
 
 const props = defineProps<NodeViewProps>()
 
 const nodeAttrs = computed(() => props.node?.attrs)
-const title = computed(() => nodeAttrs.value.title ?? '')
+
+const onClick = () => {
+  window.open(nodeAttrs.value.href, nodeAttrs.value.target)
+}
 
 console.log({ props, nodeAttrs }, 'node attrs')
 </script>
+
+<style lang="scss" scoped>
+.wrapper {
+  display: inline;
+}
+</style>
