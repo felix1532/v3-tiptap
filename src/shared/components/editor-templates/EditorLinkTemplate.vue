@@ -16,9 +16,13 @@ import { Tooltip } from '@/shared/components'
 const props = defineProps<NodeViewProps>()
 
 const nodeAttrs = computed(() => props.node?.attrs)
+const isOpenOnClick = computed(() => props.extension.options.isOpenOnClick)
 
 const onClick = () => {
-  window.open(nodeAttrs.value.href, nodeAttrs.value.target)
+  console.log(isOpenOnClick.value)
+  if (isOpenOnClick.value) {
+    window.open(nodeAttrs.value.href, nodeAttrs.value.target)
+  }
 }
 
 console.log({ props, nodeAttrs }, 'node attrs')

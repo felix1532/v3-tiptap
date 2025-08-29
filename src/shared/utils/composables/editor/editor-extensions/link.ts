@@ -11,6 +11,7 @@ export interface LinkAttributes {
 
 export interface LinkOptions {
   HTMLAttributes: Record<string, any>
+  isOpenOnClick: boolean
 }
 
 declare module '@tiptap/core' {
@@ -32,6 +33,7 @@ export const LinkExtension = Node.create<LinkOptions>({
   addOptions() {
     return {
       HTMLAttributes: {},
+      isOpenOnClick: true,
     }
   },
 
@@ -42,9 +44,6 @@ export const LinkExtension = Node.create<LinkOptions>({
       },
       target: {
         default: '_blank',
-      },
-      title: {
-        default: null,
       },
       rel: {
         default: 'noopener noreferrer nofollow',

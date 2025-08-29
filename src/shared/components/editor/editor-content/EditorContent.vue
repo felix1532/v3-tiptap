@@ -52,6 +52,6 @@ const classes = computed(() => ({
 }
 
 .only-view :deep(.tiptap) {
-  padding: 0;
+  padding: 32px;
 }
 </style>

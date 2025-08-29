@@ -18,7 +18,7 @@ export const initEditor = (
     editable,
     content: initContent ?? null,
 
-    extensions: getEditorExtensions(),
+    extensions: getEditorExtensions(editable),
   }
 
   const editor = useTiptapEditor(editorOptions)
